@@ -26,8 +26,7 @@ const getUserById = async (userId) => {
 const saveNewUser = async (user) => {
     try {
         const db = await getDb();
-        const saltRoundsNumber = Number(saltRounds) || 10;
-        const hashedPassword = bcrypt.hash(user.password, saltRoundsNumber);
+        const hashedPassword = await bcrypt.hash(user.password, Number(saltRounds) || 10);
         user.password = hashedPassword;
         const queryCursor = db.collection("users").insertOne(user);
         const queryResult = await queryCursor;
