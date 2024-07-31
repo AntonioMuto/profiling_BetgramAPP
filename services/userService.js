@@ -60,7 +60,7 @@ const loginUser = async (user) => {
         userDb.password = null;
         return userDb;
     } catch (error) {
-        next(error);
+        throw new Error(error);
     }
 };
 
